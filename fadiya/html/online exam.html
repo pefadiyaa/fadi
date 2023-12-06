@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Exam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <h2>Online Exam</h2>
+    <div id="question-container"></div>
+    <button id="next-button">Next</button>
+    <div id="result-container"></div>
+</div>
+
+<script>
+    const questions = [
+        {
+            question: "What is the capital of France?",
+            options: ["Berlin", "Madrid", "Paris", "Rome"],
+            correctAnswer: "Paris"
+        },
+        {
+            question: "Which programming language is this example written in?",
+            options: ["Java", "JavaScript", "Python", "C++"],
+            correctAnswer: "JavaScript"
+        },
+        // Add more questions as needed
+    ];
+
+    let currentQuestionIndex = 0;
+    let userAnswers = [];
+
+    const questionContainer = document.getElementById('question-container');
+    const nextButton = document.getElementById('next-button');
+    const resultContainer = document.getElementById('result-container');
+
+    function showQuestion(index) {
+        const currentQuestion = questions[index];
+        questionContainer.innerHTML = `
+            <p>${currentQuestion.question}</p>
+            <ul>
+                ${currentQuestion.options.map(option => `<li>${option}</li>`).join('')}
+            </ul>
+        `;
+    }
+
+    function showResult() {
+        const correctAnswers = questions.filter((question, index) => userAnswers[index] === question.correctAnswer);
+        resultContainer.innerHTML = `You scored ${correctAnswers.length} out of ${questions.length} questions correctly.`;
+    }
+
+    function nextQuestion() {
+        const selectedOptions = Array.from(document.querySelectorAll('ul li')).filter(li => li.classList.contains('selected'));
+        if (selectedOptions.length > 0) {
+            userAnswers.push(selectedOptions[0].textContent);
+        } else {
+            userAnswers.push(null);
+        }
+
+        if (currentQuestionIndex < questions.length - 1) {
+            currentQuestionIndex++;
+            showQuestion(currentQuestionIndex);
+            document.querySelectorAll('ul li').forEach(li => li.classList.remove('selected'));
+        } else {
+            showResult();
+            nextButton.disabled = true;
+        }
+    }
+
+    questionContainer.addEventListener('click', function (event) {
+        if (event.target.tagName === 'LI') {
+            document.querySelectorAll('ul li').forEach(li => li.classList.remove('selected'));
+            event.target.classList.add('selected');
+        }
+    });
+
+    nextButton.addEventListener('click', nextQuestion);
+
+    showQuestion(currentQuestionIndex);
+</script>
+
+</body>
+</html>
+

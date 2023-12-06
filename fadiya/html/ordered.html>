@@ -1,0 +1,39 @@
+<html>
+<body>
+<head>Department of college</>
+<ol>
+<li>MCA</li>
+<li>MBA</li>
+<li>CS</li>
+<li>MECH</li>
+<li>CIVIL</li>
+</ol>
+</body>
+</html>
+<html>
+<body>
+<head>Department of college</>
+<ul>
+<li>MCA</li>
+<li>MBA</li>
+<li>CS</li>
+<li>MECH</li>
+<li>CIVIL</li>
+</ul>
+</body>
+</html>
+<<html>
+<body>
+
+<h2>A discription List</h2>
+
+<dl>
+  <dt>C++</dt>
+  <dd>- farisa</dd>
+  <dt>python</dt>
+  <dd>-sheena</dd>
+</dl>
+
+</body>
+</html>
+
